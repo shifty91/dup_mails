@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 #
-# Time-stamp: <2016-02-21 18:18:23 kurt>
+# Time-stamp: <2016-02-21 18:30:49 kurt>
 #
 # dup_mails.pl -- Script to find and remove duplicates mails in a Maildir.
 #
@@ -214,9 +214,9 @@ sub remove_duplicates
 sub print_statistics
 {
     print q{-} x 80 . qq{\n};
-    print qq{Mails processed: $mails_processed
-Duplicates found: $duplicates_found
-Duplicates remove: $duplicates_removed\n};
+    print qq{Mails processed   : $mails_processed
+Duplicates found  : $duplicates_found
+Duplicates removed: $duplicates_removed\n};
     print q{-} x 80 . qq{\n};
 
     return;
