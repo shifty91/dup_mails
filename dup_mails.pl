@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 #
-# Time-stamp: <2016-02-21 18:30:49 kurt>
+# Time-stamp: <2016-02-21 19:01:45 kurt>
 #
 # dup_mails.pl -- Script to find and remove duplicates mails in a Maildir.
 #
@@ -141,15 +141,12 @@ sub index_files
 sub hash_body
 {
     my ($file) = @_;
-    my ($fh, $line, $line_old, $hash);
+    my ($fh, $line, $hash);
 
     open($fh, q{<}, $file) or kurt_err(qq{Failed to open file '$file': $!});
     # skip header
-    $line_old = "";
     while ($line = <$fh>) {
-        last if (($line     eq qq{\n} || $line     eq qq{\r\n}) &&
-                 ($line_old eq qq{\n} || $line_old eq qq{\r\n}));
-        $line_old = $line;
+        last if ($line =~ /^\s*(?:\n|\r\n)\s*$/xm);
     }
     # hash body
     $hash = sha1_hex(do { local $/ = undef; <$fh>; });
