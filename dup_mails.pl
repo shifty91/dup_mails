@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 #
-# Time-stamp: <2016-02-21 13:12:19 kurt>
+# Time-stamp: <2016-02-21 18:18:23 kurt>
 #
 # dup_mails.pl -- Script to find and remove duplicates mails in a Maildir.
 #
@@ -254,11 +254,11 @@ options, run: dup_mails.pl --help.
 
 Examples:
 
-1. Find duplicates (-> will be printed to stdout)
+1. Find duplicates via Message-Id header (-> will be printed to stdout)
 
     ./dup_mails -p -m ~/Maildir
 
-2. Remove duplicates (-> better make a backup before)
+2. Remove duplicates via message body (-> better make a backup before)
 
     ./dup_mails -v -f -m ~/Maildir
 
@@ -268,6 +268,6 @@ Kurt Kanzenbach <kurt@kmk-computers.de>
 
 =head1 LICENSE
 
-BSD
+BSD 2-clause
 
 =cut
