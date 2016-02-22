@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 #
-# Time-stamp: <2016-02-21 19:01:45 kurt>
+# Time-stamp: <2016-02-22 22:01:19 kurt>
 #
 # dup_mails.pl -- Script to find and remove duplicates mails in a Maildir.
 #
@@ -62,6 +62,17 @@ sub kurt_err
     print STDERR "[ERROR $file:$line]: $msg\n";
 
     exit -1;
+}
+
+sub kurt_warn
+{
+    my ($msg) = @_;
+    my (undef, $file, $line, undef) = caller(0);
+
+    chomp $msg;
+    print STDERR "[WARNING $file:$line]: $msg\n";
+
+    return;
 }
 
 sub print_usage_and_die
@@ -199,7 +210,12 @@ sub remove_duplicates
         # keep first mail
         for my $i (1..$num-1) {
             my ($file) = ($data{$item}->[$i]);
-            unlink $file or kurt_err(qq{Removal of file '$file' failed: $!});
+
+            unless (unlink $file) {
+                kurt_warn(qq{Removal of mail '$file' failed: $!});
+                next;
+            }
+
             ++$duplicates_removed;
             vprint qq{Removed mail '$file'};
         }
